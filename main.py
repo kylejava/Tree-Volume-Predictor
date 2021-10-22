@@ -12,12 +12,16 @@ df.shape
 plt.xlabel('Circumference')
 plt.ylabel('Volume')
 
+x = 14.1
 
 X_train, X_test, y_train, y_test = train_test_split(df[['Girth']], df['Volume'], test_size=0.2, random_state=0)
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
-val = (regressor.predict([[15.2]]))
-plt.plot(15.2, val[0])
+val = (regressor.predict([[x]]))
+m, b = np.polyfit(df['Girth'], df['Volume'], 1)
+plt.plot(df['Girth'], m*df['Girth'] + b)
+plt.plot(x, val[0],'o')
+print(val[0])
 plt.scatter(df['Girth'],df['Volume'],color = 'red' , marker = '+')
 plt.savefig(img_buf, format = 'png')
 #reg = LinearRegression().fit(df[['Girth']], df[['Volume']])
